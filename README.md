@@ -3,7 +3,7 @@
 Minimal reproducers for two places where `qemu-user` does not answer like the
 Linux kernel for degenerate buffer pointers, plus the measured behaviour.
 
-Both are in `linux-user/syscall.c` as of commit `d731492832` (2026-10-24).
+Both are in `linux-user/syscall.c` as of commit `3a202dab30` (2026-10-31).
 
 ## 1. `getrandom(NULL, 0, 0)` fails with EFAULT
 
