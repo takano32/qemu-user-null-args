@@ -72,3 +72,11 @@ Two patches for `linux-user/syscall.c`, sent to qemu-devel separately:
 
 A regression test for both lives in
 `tests/tcg/multiarch/linux/linux-null-buffer.c` upstream.
+
+## Note on 32-bit x86
+
+The reproducers call `getitimer()` through the libc wrapper.  On 32-bit x86
+glibc hands the kernel a local structure and copies the result out in user
+space, so a NULL pointer segfaults in libc before the kernel's answer is
+visible - measure this one with `syscall(SYS_getitimer, ITIMER_REAL, NULL)`
+(or run the aarch64 build, as above).  The upstream test does exactly that.
